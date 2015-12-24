@@ -13,8 +13,41 @@
 
 
     <script>
+
+        var addEvent=(function(){
+            if(document.addEventListener){
+                return function(el,type,fn){
+                    if(el.length){
+                        for(var i=0;i<el.length;i++){
+                            addEvent(el[i],type,fn);
+                        }
+                    } else {
+                        el.addEventListener(type, fn, false);
+                    }
+                };
+            }else{
+                return function(el,type,fn){
+                    if(el.length){
+                        for(var i=0;i<el.length;i++){
+                            addEvent(el[i],type,fn);
+                        }
+                    }else{
+                        el.attachEvent('on'+type,function(){
+                            return fn.call(el,window.event);
+                        });
+                    }
+                };
+            }
+        })();
+        
         var util = new util();
         alert(util.getElement("p1").innerHTML);
+        util.addEvent(util.getElement("p1"), "click", function () { alert("2"); });
+
+        var a = [];
+        a[0] = "0";
+        a[1] = "1";
+
     </script>
 
 
