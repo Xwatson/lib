@@ -231,6 +231,35 @@ function util() {
                     setTimeout(function () { util.setOpacity(elem, pos); }, (pos + 1) * 10);
                 }
             }
+        },
+        //获取页面的高度
+        getPageHeight: function () {
+            var de = document.documentElement;
+            return document.body.scrollHeight || (de && de.scrollHeight);
+        },
+        //获取页面的宽度
+        getPageWidth: function () {
+            var de = document.documentElement;
+            return document.body.scrollWidth || (de && de.scrollWidth);
+        },
+        //获取滚动条的位置。
+        scrollX: function () {
+            var de = document.documentElement;
+            return self.pageXOffset || (de && de.scrollLeft) || document.body.scrollLeft;
+        },
+        scrollY: function () {
+            var de = document.documentElement;
+            return self.pageYOffset || (de && de.scrollTop) || document.body.scrollTop;
+        },
+        //获取视口的高度
+        windowHeight: function () {
+            var de = document.documentElement;
+            return self.innerHeight || (de && de.offsetHeight) || document.body.offsetHeight;
+        },
+        //获取视口的宽度
+        windowWidth: function () {
+            var de = document.documentElement;
+            return self.innerWidth || (de && de.offsetWidth) || document.body.offsetWidth;
         }
     }
 }
