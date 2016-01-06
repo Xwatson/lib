@@ -1,10 +1,9 @@
-/**
+ï»¿/**
  * 
  */
-function util()
-{
-    //´´½¨XMLHttpRequest
-    function ceateHttpRequest() {
+function util() {
+    //åˆ›å»ºXMLHttpRequest
+    function createHttpRequest() {
         var xmlHttp;
         if (window.ActiveXObject) {
             xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
@@ -15,20 +14,20 @@ function util()
         return xmlHttp;
     }
     /**
-    * ·¢ËÍajaxÇëÇó
+    * å‘é€ajaxè¯·æ±‚
     * url--url
     * method(post/get)
-    * ansytype (true(Òì²½)|false(Í¬²½))
-    * params(²ÎÊı)
-    * functionName(»Øµ÷·½·¨Ãû£¬²»ĞèÒªÒıºÅ,ÕâÀïÖ»ÓĞ³É¹¦µÄÊ±ºò²Åµ÷ÓÃ)
-    * (×¢Òâ£ºÕâ·½·¨ÓĞ¶ş¸ö²ÎÊı£¬Ò»¸ö¾ÍÊÇxmlhttp,Ò»¸ö¾ÍÊÇÒª´¦ÀíµÄ¶ÔÏó)
-    * objĞèÒªµ½»Øµ÷·½·¨ÖĞ´¦ÀíµÄ¶ÔÏó
+    * ansytype (true(å¼‚æ­¥)|false(åŒæ­¥))
+    * params(å‚æ•°)
+    * functionName(å›è°ƒæ–¹æ³•åï¼Œä¸éœ€è¦å¼•å·,è¿™é‡Œåªæœ‰æˆåŠŸçš„æ—¶å€™æ‰è°ƒç”¨)
+    * (æ³¨æ„ï¼šè¿™æ–¹æ³•æœ‰äºŒä¸ªå‚æ•°ï¼Œä¸€ä¸ªå°±æ˜¯xmlhttp,ä¸€ä¸ªå°±æ˜¯è¦å¤„ç†çš„å¯¹è±¡)
+    * objéœ€è¦åˆ°å›è°ƒæ–¹æ³•ä¸­å¤„ç†çš„å¯¹è±¡
     */
     function ajaxrequest(url, method, ansytype, params, callback, obj) {
-        var xmlhttp = ceateHttpRequest();
+        var xmlhttp = createHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
-                //HTTPÏìÓ¦ÒÑ¾­ÍêÈ«½ÓÊÕ²Åµ÷ÓÃ
+                //HTTPå“åº”å·²ç»å®Œå…¨æ¥æ”¶æ‰è°ƒç”¨
                 if (xmlHttp.status == 200) {
                     callback(xmlhttp, obj);
                 }
@@ -37,8 +36,9 @@ function util()
         xmlhttp.open(method, url, ansytype);
         xmlhttp.send(params);
     }
+
     return {
-        //»ñÈ¡ÔªËØby id or name
+        //è·å–å…ƒç´ by id or name
         getElement: function (id) {
             if (document.getElementById(id)) {
                 return document.getElementById(id);
@@ -47,44 +47,44 @@ function util()
                 return document.getElementsByName(id);
             }
         },
-        // Ìí¼ÓÊÂ¼ş¼àÌı
-        addEvent:function(){
-            if(document.addEventListener){
-                return function(el,type,fn){
-                    if(el.length){
-                        for(var i=0;i<el.length;i++){
-                            addEvent(el[i],type,fn);
+        // æ·»åŠ äº‹ä»¶ç›‘å¬
+        addEvent: function () {
+            if (document.addEventListener) {
+                return function (el, type, fn) {
+                    if (el.length) {
+                        for (var i = 0; i < el.length; i++) {
+                            addEvent(el[i], type, fn);
                         }
-                    }else{
-                        el.addEventListener(type,fn,false);
+                    } else {
+                        el.addEventListener(type, fn, false);
                     }
                 };
-            }else{
-                return function(el,type,fn){
-                    if(el.length){
-                        for(var i=0;i<el.length;i++){
-                            addEvent(el[i],type,fn);
+            } else {
+                return function (el, type, fn) {
+                    if (el.length) {
+                        for (var i = 0; i < el.length; i++) {
+                            addEvent(el[i], type, fn);
                         }
-                    }else{
-                        el.attachEvent('on'+type,function(){
-                            return fn.call(el,window.event);
+                    } else {
+                        el.attachEvent('on' + type, function () {
+                            return fn.call(el, window.event);
                         });
                     }
                 };
             }
-        }(),
-        //ajax ²Ù×÷·½·¨
-        //url:½Ó¿ÚµØÖ·
-        //method:·½·¨£¨post/get)
-        //ansytype:Í¬²½·½Ê½£¨true(Òì²½)/false(Í¬²½) Ä¬ÈÏtrue)
-        //params:²ÎÊı
-        //callback:»Øµ÷º¯Êı
-        //obj:»Øµ÷º¯ÊıµÄ²ÎÊı
+        } (),
+        //ajax æ“ä½œæ–¹æ³•
+        //url:æ¥å£åœ°å€
+        //method:æ–¹æ³•ï¼ˆpost/get)
+        //ansytype:åŒæ­¥æ–¹å¼ï¼ˆtrue(å¼‚æ­¥)/false(åŒæ­¥) é»˜è®¤true)
+        //params:å‚æ•°
+        //callback:å›è°ƒå‡½æ•°
+        //obj:å›è°ƒå‡½æ•°çš„å‚æ•°
         ajax: function (url, method, ansytype, params, callback, obj) {
-            var xmlhttp = ceateHttpRequest();
+            var xmlhttp = createHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4) {
-                    //HTTPÏìÓ¦ÒÑ¾­ÍêÈ«½ÓÊÕ²Åµ÷ÓÃ
+                    //HTTPå“åº”å·²ç»å®Œå…¨æ¥æ”¶æ‰è°ƒç”¨
                     if (xmlHttp.status == 200) {
                         if (callback) {
                             callback(xmlhttp, obj);
@@ -92,9 +92,145 @@ function util()
                     }
                 }
             };
-            xmlhttp.open(method, url, ansytype==undefined?true:false);
+            xmlhttp.open(method, url, ansytype == undefined ? true : false);
             xmlhttp.send(params);
-        }
+        },
+        //è·å–å…ƒç´ çš„æ ·å¼å€¼ã€‚
+        getStyle: function (elem, name) {
+            if (elem.style[name]) {
+                return elem.style[name];
+            }
+            else if (elem.currentStyle) {
+                return elem.currentStyle[name];
+            }
+            else if (document.defaultView && document.defaultView.getComputedStyle) {
+                name = name.replace(/([A-Z])/g, "-$1");
+                name = name.toLowerCase();
+                var s = document.defaultView.getComputedStyle(elem, "");
+                return s && s.getPropertyValue(name);
+            }
+            else {
+                return null
+            }
+        },
+        
+        //è·å–å…ƒç´ ç›¸å¯¹äºè¿™ä¸ªé¡µé¢çš„xå’Œyåæ ‡ã€‚    
+        getPageCoords: function (elem) {
+            function pageX(elem) {
+                return elem.offsetParent ? (elem.offsetLeft + pageX(elem.offsetParent)) : elem.offsetLeft;
+            }
 
+            function pageY(elem) {
+                return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
+            }
+            return {
+                X: pageX(elem),
+                Y: pageY(elem)
+            }
+        },
+        //è·å–å…ƒç´ ç›¸å¯¹äºçˆ¶å…ƒç´ çš„xå’Œyåæ ‡ã€‚    
+        getParentCoords: function (elem) {
+            function parentX(elem) {
+                return elem.parentNode == elem.offsetParent ? elem.offsetLeft : pageX(elem) - pageX(elem.parentNode);
+            }
+            function parentY(elem) {
+                return elem.parentNode == elem.offsetParent ? elem.offsetTop : pageY(elem) - pageY(elem.parentNode);
+            }
+            return {
+                X: parentX(elem),
+                Y: parentY(elem)
+            }
+        },
+        //è·å–ä½¿ç”¨csså®šä½çš„å…ƒç´ çš„xå’Œyåæ ‡ã€‚
+        getCssCoords: function (elem) {
+            function posX(elem) {
+                return parseInt(util.getStyle(elem, "left"));
+            }
+            function posY(elem) {
+                return parseInt(util.getStyle(elem, "top"));
+            }
+            return {
+                X: posX(elem),
+                Y: posY(elem)
+            }
+        },
+        
+        //è·å–å…ƒç´ ä½¿ç”¨cssæ§åˆ¶å¤§å°çš„é«˜åº¦å’Œå®½åº¦    
+        height: function (elem) {
+            return parseInt(util.getStyle(elem, "height"));
+        },
+        width: function (elem) {
+            return parseInt(utilgetStyle(elem, "width"));
+        },
+        getFullWidth: function (elem) {
+            if (util.getStyle(elem, "display") != "none") {
+                return util.width(elem) || elem.offsetWidth;
+            }
+            else {
+                var old = util.resetCss(elem, { display: "block", visibility: "hidden", position: "absolute" });
+                var w = elem.clientWidth || util.width(elem);
+                util.restoreCss(elem, old);
+                return w;
+            }
+        },
+        //è®¾ç½®cssï¼Œå¹¶ä¿å­˜æ—§çš„css
+        resetCss: function (elem, prop) {
+            var old = {};
+            for (var i in prop) {
+                old[i] = elem.style[i];
+                elem.style[i] = prop[i];
+            }
+            return old;
+        },
+        restoreCss: function (elem, prop) {
+            for (var i in prop) {
+                elem.style[i] = prop[i];
+            }
+        },
+
+        //æ˜¾ç¤º
+        show: function (elem) {
+            elem.style.display = elem.$oldDisplay || " ";
+        },
+        //éšè—
+        hide: function (elem) {
+            var curDisplay = util.getStyle(elem, "display");
+            if (curDisplay != "none") {
+                elem.$oldDisplay = curDisplay;
+                elem.style.display = "none";
+            }
+        },
+        //è®¾ç½®é€æ˜åº¦    
+        setOpacity: function (elem, num) {
+            if (elem.filters) {
+                elem.style.filter = "alpha(opacity=" + num + ")";
+            }
+            else {
+                elem.style.opacity = num / 100;
+            }
+        },
+        //æ»‘åŠ¨    
+        slideDown: function (elem) {
+            var h = util.getFullHeight(elem);
+            elem.style.height = "0px";
+            util.show(elem);
+            for (var i = 0; i <= 100; i += 5) {
+                new function () {
+                    var pos = i;
+                    setTimeout(function () { elem.style.height = (pos / 100 * h) + "px"; }, (pos * 10));
+                }
+            }
+        },
+        //æ¸å˜
+        fadeIn: function (elem) {
+            util.show(elem);
+            util.setOpacity(elem, 0);
+            for (var i = 0; i <= 100; i += 5) {
+                new function () {
+                    var pos = i;
+                    setTimeout(function () { util.setOpacity(elem, pos); }, (pos + 1) * 10);
+                }
+            }
+        }
     }
 }

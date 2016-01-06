@@ -8,13 +8,15 @@
 </head>
 <body>
     <div>
-        <p id="p1">this is example</p>
+        <p id="p1" style="font-size:18px;">this is example</p>
     </div>
-
+<div>
+    <p id="p2"></p>
+    </div>
 
     <script>
 
-        var addEvent=(function(){
+       /* var addEvent=(function(){
             if(document.addEventListener){
                 return function(el,type,fn){
                     if(el.length){
@@ -39,15 +41,15 @@
                 };
             }
         })();
-        
+        */
         var util = new util();
         alert(util.getElement("p1").innerHTML);
         util.addEvent(util.getElement("p1"), "click", function () { alert("2"); });
-
+        alert(util.getStyle(document.getElementById("p1"),"font-size"));
         var a = [];
         a[0] = "0";
         a[1] = "1";
-
+        util.getElement("p2").innerHTML=util.height(util.getElement("p1"));
     </script>
 
 
