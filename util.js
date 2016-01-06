@@ -39,7 +39,7 @@ function util() {
 
     return {
         //获取元素by id or name
-        getElement: function (id) {
+        getElement: function(id) {
             if (document.getElementById(id)) {
                 return document.getElementById(id);
             }
@@ -48,9 +48,9 @@ function util() {
             }
         },
         // 添加事件监听
-        addEvent: function () {
+        addEvent: function() {
             if (document.addEventListener) {
-                return function (el, type, fn) {
+                return function(el, type, fn) {
                     if (el.length) {
                         for (var i = 0; i < el.length; i++) {
                             addEvent(el[i], type, fn);
@@ -60,7 +60,7 @@ function util() {
                     }
                 };
             } else {
-                return function (el, type, fn) {
+                return function(el, type, fn) {
                     if (el.length) {
                         for (var i = 0; i < el.length; i++) {
                             addEvent(el[i], type, fn);
